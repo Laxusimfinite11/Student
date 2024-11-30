@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="subjects.css">
 </head>
 <body style="background-color: #024059;">
-
     <div class="container mt-5">
         <h2 class="text-center text-light">Student Subjects Dashboard</h2>
         <div class="card mt-4">
@@ -16,13 +15,15 @@
                 <h4>Student Name: <span id="studentName">Lexical Analysis Taladro</span></h4>
                 <h5>Student ID: <span id="studentID">1</span></h5>
                 <h4 class="mt-4">Subjects</h4>
-                <table class="table table-striped">
+                <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#addSubjectModal">Enroll Subject</button>
+                <table class="table table-striped text-center">
                     <thead>
                         <tr>
                             <th>Subject Name</th>
                             <th>Subject Code</th>
                             <th>Instructor</th>
                             <th>Grading</th>
+                            <th>U/D</th>
                         </tr>
                     </thead>
                     <tbody id="subjectsTable">
@@ -33,15 +34,70 @@
                             <td>
                                 <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#addGradeModal">Add Grades</button>
                             </td>
+                            <td>
+                                <div class="d-flex justify-content-center">
+                                    <button class="btn btn-warning btn-sm me-2" data-bs-toggle="modal" data-bs-target="#editSubjectModal">Edit</button>
+                                    <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#deleteConfirmationModal">Unenroll</button>
+                                </div>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
-                <button class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#addSubjectModal">Add Subject</button>
             </div>
         </div>
     </div>
 
-    <!-- add student modal dito -->
+    <!-- dito edit subject -->
+    <div class="modal fade" id="editSubjectModal" tabindex="-1" aria-labelledby="editSubjectModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editSubjectModalLabel">Edit Subject</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editSubjectForm">
+                        <div class="mb-3">
+                            <label for="editSubjectName" class="form-label">Subject Name</label>
+                            <input type="text" class="form-control" id="editSubjectName" value="Advance Database" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editSubjectCode" class="form-label">Subject Code</label>
+                            <input type="text" class="form-control" id="editSubjectCode" value="CS 9/L" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editInstructorName" class="form-label">Instructor</label>
+                            <input type="text" class="form-control" id="editInstructorName" value="Eric Rivera" required>
+                        </div>
+                        <div class="text-end">
+                            <button type="button" class="btn btn-success" data-bs-dismiss="modal">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--dito confirm delete -->
+    <div class="modal fade" id="deleteConfirmationModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Confirm Unenrollment</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure you want to unenroll this subject?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- dit add subject -->
     <div class="modal fade" id="addSubjectModal" tabindex="-1" aria-labelledby="addSubjectModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -59,10 +115,12 @@
                             <label for="subjectCode" class="form-label">Subject Code</label>
                             <input type="text" class="form-control" id="subjectCode" required>
                         </div>
+                        <div class="mb-3">
+                            <label for="subjectInstructor" class="form-label">Instructor</label>
+                            <input type="text" class="form-control" id="subjectCode" required>
+                        </div>
                         <div class="text-end">
-                            <button type="button" class="btn btn-success" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#cautionSubjectModal">
-                                Enroll Subject
-                            </button>
+                            <button type="button" class="btn btn-success" data-bs-dismiss="modal">Enroll Subject</button>
                         </div>
                     </form>
                 </div>
@@ -70,25 +128,7 @@
         </div>
     </div>
 
-    <div class="modal fade" id="cautionSubjectModal" tabindex="-1" aria-labelledby="cautionSubjectModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="cautionSubjectModalLabel">Enroll Subject</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Enroll on this subject?</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">Confirm Enrollment</button>
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- modal ng add grade -->
+    <!-- dito ung add grade -->
     <div class="modal fade" id="addGradeModal" tabindex="-1" aria-labelledby="addGradeModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -103,29 +143,9 @@
                             <input type="text" class="form-control" id="gradeValue" required>
                         </div>
                         <div class="text-end">
-                            <button type="button" class="btn btn-success" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#cautionGradeModal">
-                                Add Grade
-                            </button>
+                            <button type="button" class="btn btn-success" data-bs-dismiss="modal">Add Grade</button>
                         </div>
                     </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="cautionGradeModal" tabindex="-1" aria-labelledby="cautionGradeModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="cautionGradeModalLabel">Add Grade</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Add grade to this subject?</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">Confirm Grading</button>
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
                 </div>
             </div>
         </div>
@@ -134,4 +154,3 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-

@@ -20,3 +20,17 @@ h4, h5 {
     background-color: #28a745;
     border-color: #28a745;
 }
+
+.btn-delete {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    color: white;
+}
+
+.btn-delete:hover {
+    background-color: #912530;
+    color: white;
+}
+
+
+
