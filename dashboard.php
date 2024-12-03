@@ -1,3 +1,9 @@
+<?php
+include ('conn.php');
+
+$query = "SELECT user_id, first_name, last_name, email FROM users";
+$result = $conn->query($query);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -70,36 +76,40 @@
                         <th>Student ID</th>
                         <th>Last Name</th>
                         <th>First Name</th>
-                        <th>Middle Name</th>
                         <th>Email</th>
-                        <th>Age</th>
                         <th>Subjects</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- nag add ako example para makita niyo result pag nalagyan
-                     , kayo na mag connect wahhaahaha -->
-                    <tr>
-                        <td>1</td>
-                        <td>Taladro</td>
-                        <td>Lexical</td>
-                        <td>Analysis</td>
-                        <td>lexicaltaladro@totoy.com</td>
-                        <td>30</td>
-                        <td>
-                            <a href="subjects.html" class="btn btn-view-subjects btn-sm">View Subjects</a>
-                        </td>
-                        <td>
-                            <button class="btn btn-warning btn-sm">Edit</button>
-                            <button class="btn btn-danger btn-sm" 
-                                    data-bs-toggle="modal" 
-                                    data-bs-target="#deleteConfirmationModal" 
-                                    data-student-id="1">
-                                Delete
-                            </button>
-                        </td>
-                    </tr>
+                    <?php if ($result->num_rows > 0): ?>
+                        <?php while ($row = $result->fetch_assoc()): ?>
+                            <!-- nag add ako example para makita niyo result pag nalagyan
+                            , kayo na mag connect wahhaahaha -->
+                            <tr>
+                                <td><?php echo $row['user_id']; ?></td>
+                                <td><?php echo $row['first_name']; ?></td>
+                                <td><?php echo $row['last_name']; ?></td>
+                                <td><?php echo $row['email']; ?></td>
+                                <td>
+                                    <a href="subjects.html" class="btn btn-view-subjects btn-sm">View Subjects</a>
+                                </td>
+                                <td>
+                                    <button class="btn btn-warning btn-sm">Edit</button>
+                                    <button class="btn btn-danger btn-sm" 
+                                            data-bs-toggle="modal" 
+                                            data-bs-target="#deleteConfirmationModal" 
+                                            data-student-id="1">
+                                        Delete
+                                    </button>
+                                </td>
+                            </tr>
+                        <?php endwhile; ?>
+                    <?php else: ?>
+                        <tr>
+                            <td colspan="8">No students found.</td>
+                        </tr>
+                    <?php endif; ?>
                 </tbody>
             </table>
         </div>
@@ -128,4 +138,6 @@
 </body>
 </html>
 
-
+<?php
+$conn->close();
+?>
