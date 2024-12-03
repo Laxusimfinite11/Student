@@ -1,0 +1,203 @@
+
+
+.navbar {
+    background-color: white;
+    padding: 10px 20px;
+    border-bottom: 2px solid #ddd;
+    margin: 30px;
+    margin-top: 10px;
+    border-radius: 7px;
+}
+
+.navbar .navbar-brand h1 {
+    color: #024059;
+    font-size: 24px;
+    margin: 0;
+    font-weight: 600;
+}
+
+.navbar .navbar-nav {
+    margin-left: auto;
+}
+
+.navbar .nav-item {
+    list-style: none;
+    margin-left: 15px;
+}
+
+.navbar .nav-link {
+    text-decoration: none;
+    color: #024059;
+    font-size: 16px;
+}
+
+.navbar .nav-link:hover {
+    color: #28a745;
+}
+
+.navbar .btn-log-out {
+    background-color: #28a745;
+    color: white;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    text-decoration: none;
+}
+
+.navbar .btn-log-out:hover {
+    background-color: #175825;
+}
+
+
+.container {
+    max-width: 1500px;
+    margin: auto;
+}
+
+h1 {
+    color: white;
+    font-size: 36px;
+    margin-bottom: 30px;
+}
+
+
+.btn-add-student {
+    background-color: #28a745;
+    color: white;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-add-student:hover {
+    background-color: #175825;
+}
+
+.btn-log-out {
+    background-color: #28a745;
+    color: white;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+}
+
+.btn-log-out:hover {
+    background-color: #175825;
+}
+
+.dashboard-container {
+    background-color: #C5D5D9;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th, table td {
+    padding: 15px;
+    text-align: center;
+}
+
+table th {
+    background-color: #024059;
+    color: white;
+}
+
+table td {
+    background-color: white;
+}
+
+table tr:nth-child(even) td {
+    background-color: #f9f9f9;
+}
+
+
+.btn-edit, .btn-delete, .btn-view-subjects {
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.btn-edit {
+    background-color: #ffc107;
+    color: white;
+}
+
+.btn-edit:hover {
+    background-color: #e0a800;
+}
+
+.btn-delete {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn-delete:hover {
+    background-color: #c82333;
+}
+
+.btn-view-subjects {
+    background-color: #28a745;
+    color: white;
+}
+
+.btn-view-subjects:hover {
+    background-color: #165c26;
+    color: white;
+}
+
+.modal-content {
+    border-radius: 10px;
+}
+
+.modal-header {
+    background-color: #024059;
+    color: white;
+}
+
+.modal-body {
+    background-color: #f9f9f9;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-control {
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 14px;
+}
+
+button[type="submit"] {
+    background-color: #28a745;
+    border-radius: 5px;
+    padding: 10px 20px;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover {
+    background-color: #144e20;
+}
+
+@media (max-width: 768px) {
+    table th, table td {
+        padding: 10px;
+    }
+
+    .btn-add-student {
+        padding: 8px 16px;
+    }
+}

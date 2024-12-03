@@ -1,0 +1,19 @@
+
+.login-container {
+    width: 500px;
+    margin: auto;
+    padding: 50px;
+    background-color: #C5D5D9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.centered-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.btn-primary:hover {
+    background-color: #98caff;
+    transform: scale(1.05);
+}
