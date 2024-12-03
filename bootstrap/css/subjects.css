@@ -1,0 +1,22 @@
+.card {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+}
+
+h4, h5 {
+    color: #000;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.btn-primary {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+}
