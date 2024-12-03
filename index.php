@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Log-In</title>
-    <link rel="stylesheet" href="login.css">
-    <link rel="stylesheet" href="css/mdb.rtl.min.css">
+    <link rel="stylesheet" href="bootstrap/css/login.css">
+    <link rel="stylesheet" href="bootstrap/css/mdb.rtl.min.css">
 </head>
 <body style="background-color: #024059 ;">
 <div class="container-fluid">

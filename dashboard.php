@@ -1,7 +1,12 @@
 <?php
 include ('conn.php');
+session_start();
 
-$query = "SELECT user_id, first_name, last_name, email FROM users";
+$user_first = $_SESSION['first_name'];
+$user_last = $_SESSION['last_name'];
+$user_role = $_SESSION['role'];
+
+$query = "SELECT user_id, first_name, last_name, email, role FROM users";
 $result = $conn->query($query);
 ?>
 <!DOCTYPE html>
@@ -11,7 +16,7 @@ $result = $conn->query($query);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Management Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="bootstrap/css/dashboard.css">
 </head>
 <body style="background-color: #024059;">
     <!-- navbar to -->
@@ -19,6 +24,8 @@ $result = $conn->query($query);
         <div class="container">
             <a class="navbar-brand" href="#">
                 <h1>Student Management Dashboard</h1>
+                <h1>Welcome!</h1>
+                <h1><?php echo htmlspecialchars($user_role); ?> <?php echo htmlspecialchars($user_first); ?> <?php echo htmlspecialchars($user_last); ?></h1>
             </a>
             <div class="navbar-nav ms-auto">
                 <a href="login.html" class="btn btn-log-out">Log Out</a>
@@ -84,26 +91,28 @@ $result = $conn->query($query);
                 <tbody>
                     <?php if ($result->num_rows > 0): ?>
                         <?php while ($row = $result->fetch_assoc()): ?>
-                            <!-- nag add ako example para makita niyo result pag nalagyan
-                            , kayo na mag connect wahhaahaha -->
-                            <tr>
-                                <td><?php echo $row['user_id']; ?></td>
-                                <td><?php echo $row['first_name']; ?></td>
-                                <td><?php echo $row['last_name']; ?></td>
-                                <td><?php echo $row['email']; ?></td>
-                                <td>
-                                    <a href="subjects.html" class="btn btn-view-subjects btn-sm">View Subjects</a>
-                                </td>
-                                <td>
-                                    <button class="btn btn-warning btn-sm">Edit</button>
-                                    <button class="btn btn-danger btn-sm" 
-                                            data-bs-toggle="modal" 
-                                            data-bs-target="#deleteConfirmationModal" 
-                                            data-student-id="1">
-                                        Delete
-                                    </button>
-                                </td>
-                            </tr>
+                            <?php if ($row['role'] == 'Student'): ?>
+                                <!-- nag add ako example para makita niyo result pag nalagyan
+                                , kayo na mag connect wahhaahaha -->
+                                <tr>
+                                    <td><?php echo $row['user_id']; ?></td>
+                                    <td><?php echo $row['first_name']; ?></td>
+                                    <td><?php echo $row['last_name']; ?></td>
+                                    <td><?php echo $row['email']; ?></td>
+                                    <td>
+                                        <a href="subjects.html" class="btn btn-view-subjects btn-sm">View Subjects</a>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-warning btn-sm">Edit</button>
+                                        <button class="btn btn-danger btn-sm" 
+                                                data-bs-toggle="modal" 
+                                                data-bs-target="#deleteConfirmationModal" 
+                                                data-student-id="1">
+                                            Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                            <?php endif ?>
                         <?php endwhile; ?>
                     <?php else: ?>
                         <tr>
