@@ -33,10 +33,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("Location: index.php");
             exit;
         } else {
-            echo "Invalid password.";
+            echo "No such credentials found.";
         }
     } else {
-        echo "No user found with that email.";
+        echo "No such credentials found.";
     }
 
     $stmt->close();

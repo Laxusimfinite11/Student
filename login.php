@@ -2,11 +2,7 @@
 include ('conn.php');
 session_start();
 
-if(empty($_SESSION['first_name'])){
-    include ('logout.php');
-}
-
-else{
+if (isset($_SESSION['first_name'])) {
     header("Location: index.php");
 }
 ?>
