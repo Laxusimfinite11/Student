@@ -16,6 +16,8 @@ $email = mysqli_real_escape_string($conn, $email);
 $mobile_number = mysqli_real_escape_string($conn, $mobile_number);
 $password = mysqli_real_escape_string($conn, $password);
 
+$password = password_hash($password, PASSWORD_DEFAULT);
+
 
 $query = "INSERT INTO users (first_name, last_name, email, mobile_number, password, role) 
           VALUES ('$firstname', '$lastname', '$email', '$mobile_number', '$password', 'Admin')";

@@ -2,7 +2,6 @@
 include('conn.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Sanitize input
     $input_email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
     $input_password = $_POST['password'];
 
@@ -14,29 +13,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->store_result();
 
     if ($stmt->num_rows > 0) {
-        // Bind result variables
         $stmt->bind_result($id, $db_password, $first_name, $last_name, $role);
         $stmt->fetch();
 
-        // Validate password
-        if ($input_password == $db_password) { // You may want to hash and verify passwords for better security
+        if (password_verify($input_password, $db_password)) {
             session_start();
 
-            // Store user details in session
             $_SESSION['user_id'] = $id;
             $_SESSION['email'] = $input_email;
             $_SESSION['first_name'] = $first_name;
             $_SESSION['last_name'] = $last_name;
             $_SESSION['role'] = $role;
 
-            // Redirect to dashboard
             header("Location: index.php");
             exit;
         } else {
-            echo "No such credentials found.";
+            echo "Invalid email or password.";
         }
     } else {
-        echo "No such credentials found.";
+        echo "Invalid email or password.";
     }
 
     $stmt->close();

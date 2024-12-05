@@ -36,19 +36,74 @@ $subjectresult = $conn->query($query);
                         <?php if ($subjectresult->num_rows > 0): ?>
                             <?php while ($row = $subjectresult->fetch_assoc()): ?>
                                 <tr>
-                                    <td><?php echo $row['subjectID']; ?></td>
-                                    <td><?php echo $row['name']; ?></td>
-                                    <td><?php echo $row['grades']; ?></td>
+                                    <td><?php echo htmlspecialchars($row['subjectID']); ?></td>
+                                    <td><?php echo htmlspecialchars($row['name']); ?></td>
+                                    <td><?php echo htmlspecialchars($row['grades']); ?></td>
                                     <td>
-                                        <button class="btn btn-warning btn-sm">Edit</button>
+                                        <!-- Edit Button -->
+                                        <button class="btn btn-warning btn-sm" 
+                                                data-bs-toggle="modal" 
+                                                data-bs-target="#editModal-<?php echo htmlspecialchars($row['subjectID']); ?>">
+                                            Edit
+                                        </button>
+
+                                        <!-- Unenroll Button -->
                                         <button class="btn btn-danger btn-sm" 
                                                 data-bs-toggle="modal" 
-                                                data-bs-target="#deleteConfirmationModal" 
-                                                data-student-id="1">
-                                            Delete
+                                                data-bs-target="#unenrollModal-<?php echo htmlspecialchars($row['subjectID']); ?>">
+                                            Unenroll
                                         </button>
                                     </td>
                                 </tr>
+
+                                <!-- Edit Modal -->
+                                <div class="modal fade" id="editModal-<?php echo htmlspecialchars($row['subjectID']); ?>" tabindex="-1" aria-labelledby="editModalLabel-<?php echo htmlspecialchars($row['subjectID']); ?>" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <form action="edit_grades.php" method="POST">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="editModalLabel-<?php echo htmlspecialchars($row['subjectID']); ?>">Edit Subject</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <input type="hidden" name="subjectID" value="<?php echo htmlspecialchars($row['subjectID']); ?>">
+                                                    <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($studentrow['user_id']); ?>">
+                                                    <div class="mb-3">
+                                                        <label for="subjectGrades-<?php echo htmlspecialchars($row['subjectID']); ?>" class="form-label">Grades</label>
+                                                        <input type="text" class="form-control" id="subjectGrades-<?php echo htmlspecialchars($row['subjectID']); ?>" name="grades" value="<?php echo htmlspecialchars($row['grades']); ?>" required>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Unenroll Modal -->
+                                <div class="modal fade" id="unenrollModal-<?php echo htmlspecialchars($row['subjectID']); ?>" tabindex="-1" aria-labelledby="unenrollModalLabel-<?php echo htmlspecialchars($row['subjectID']); ?>" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <form action="unenroll_subject.php" method="POST">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="unenrollModalLabel-<?php echo htmlspecialchars($row['subjectID']); ?>">Unenroll Confirmation</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>Are you sure you want to unenroll from the subject "<strong><?php echo htmlspecialchars($row['name']); ?></strong>"?</p>
+                                                    <input type="hidden" name="subjectID" value="<?php echo htmlspecialchars($row['subjectID']); ?>">
+                                                    <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($studentrow['user_id']); ?>">
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                    <button type="submit" class="btn btn-danger">Unenroll</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                             <?php endwhile; ?>
                         <?php else: ?>
                             <tr>
@@ -56,61 +111,8 @@ $subjectresult = $conn->query($query);
                             </tr>
                         <?php endif; ?>
                     </tbody>
+
                 </table>
-            </div>
-        </div>
-    </div>
-
-    <!-- dito edit subject -->
-    <div class="modal fade" id="editSubjectModal" tabindex="-1" aria-labelledby="editSubjectModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="editSubjectModalLabel">Edit Subject</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="editSubjectForm">
-                        <div class="mb-3">
-                            <label for="editSubjectName" class="form-label">Subject Name</label>
-                            <input type="text" class="form-control" id="editSubjectName" value="Advance Database" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="editSubjectCode" class="form-label">Subject Code</label>
-                            <input type="text" class="form-control" id="editSubjectCode" value="CS 9/L" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="editInstructorName" class="form-label">Instructor</label>
-                            <input type="text" class="form-control" id="editInstructorName" value="Eric Rivera" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="editInstructorName" class="form-label">Grade</label>
-                            <input type="number" class="form-control" id="editGrade" value="1.25" required>
-                        </div>
-                        <div class="text-end">
-                            <button type="button" class="btn btn-success" data-bs-dismiss="modal">Save Changes</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!--dito confirm delete -->
-    <div class="modal fade" id="deleteConfirmationModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="deleteModalLabel">Confirm Unenrollment</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Are you sure you want to unenroll this subject?</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-                    <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Yes</button>
-                </div>
             </div>
         </div>
     </div>
