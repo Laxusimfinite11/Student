@@ -165,14 +165,17 @@ $result = $conn->query($query);
                                                 value="<?php echo htmlspecialchars($row['email']); ?>">
                                         </div>
                                         <div class="mb-3">
-                                            <label for="mobileNumber<?php echo $row['user_id']; ?>" class="form-label">Mobile Number</label>
+                                        <label for="mobileNumber<?php echo $row['user_id']; ?>" class="form-label">Mobile Number</label>
+                                        <div class="input-group">
+                                    <span class="input-group-text">+63</span>
+                                    
                                             <input 
                                                 type="text" 
                                                 class="form-control" 
                                                 id="mobileNumber<?php echo $row['user_id']; ?>" 
                                                 name="mobile_number" 
                                                 value="<?php echo htmlspecialchars($row['mobile_number']); ?>">
-                                        </div>
+                                </div>
                                         <div class="mb-3">
                                             <label for="password<?php echo $row['user_id']; ?>" class="form-label">Password</label>
                                             <input 
