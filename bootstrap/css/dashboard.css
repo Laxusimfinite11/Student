@@ -1,5 +1,3 @@
-
-
 .navbar {
     background-color: white;
     padding: 10px 20px;
@@ -50,6 +48,15 @@
 }
 
 
+body {
+    background-color: #024059;
+    background: 
+        linear-gradient(to left, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0) 40%),
+        linear-gradient(rgba(2, 64, 89, 0.8), rgba(2, 64, 89, 0.8)),
+        url('img/school3.jpg') no-repeat center center fixed;
+    background-size: cover;
+}
+
 .container {
     max-width: 1500px;
     margin: auto;
@@ -63,7 +70,7 @@ h1 {
 
 
 .btn-add-student {
-    background-color: #28a745;
+    background-color: #19662b;
     color: white;
     border-radius: 5px;
     padding: 10px 20px;
@@ -73,7 +80,7 @@ h1 {
 }
 
 .btn-add-student:hover {
-    background-color: #175825;
+    background-color: #13421d;
 }
 
 .btn-log-out {
@@ -82,11 +89,21 @@ h1 {
     border-radius: 5px;
     padding: 10px 20px;
     font-size: 16px;
+    font-weight: bold;
     border: none;
+    position: relative;
+    top: 360px;
+    left: 1165px;
+    width: 30%;
+    transition: opacity 0.50s ease, transform 0.50s ease;
+
 }
 
 .btn-log-out:hover {
-    background-color: #175825;
+    color: #144e20;
+    background-color: #f0f0f0;
+    transform: translateX(10px);
+    opacity: 0.7;
 }
 
 .dashboard-container {
@@ -134,7 +151,7 @@ table tr:nth-child(even) td {
 }
 
 .btn-edit:hover {
-    background-color: #e0a800;
+    background-color: #8d6a00;
 }
 
 .btn-delete {
@@ -201,3 +218,92 @@ button[type="submit"]:hover {
         padding: 8px 16px;
     }
 }
+
+.hover-container {
+}
+
+.hover-container h2 {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 500px;
+    margin-left: 1230px;
+    color: #024059;
+    font-weight: bold;
+}
+
+.hover-container a {
+    margin: 10px 0;
+}
+
+.welcome-text {
+    position: relative;
+    top: -220px;
+    right: 760px;
+    text-align: right;
+    font-size: 300%;
+}
+
+.univ-name {
+    position: relative;
+    top: -300px;
+    right: 30px;
+    text-align: right;
+    font-size: 900%;
+    color: white;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bolder;
+}
+
+.admin-dash {
+    position: relative;
+    top: -330px;
+    right: 175px;
+    text-align: right;
+    font-size: 300%;
+    color: #fecd7d;
+    font-weight: bold;
+}
+
+.admin-greet {
+    position: relative;
+    top: 100px;
+    right: 100px;
+    text-align: right;
+    font-size: 200%;
+    color: white;
+}
+
+.ready {
+    position: relative;
+    top: 100px;
+    right: 100px;
+    text-align: right;
+    font-size: 150%;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #fecd7d;
+}
+
+.btn-primary {
+    background-color: #004872;
+    color: white;
+    text-align: center;
+    position: relative;
+    top: 340px;
+    padding: 15px;
+    left: 1150px;
+    width: 30%;
+    border: none;
+    font-weight: bold;
+    margin: 13px;
+    transition: opacity 0.50s ease, transform 0.50s ease;
+}
+
+.btn-primary:hover {
+    opacity: 0.7;
+    background-color: #ffffff;
+    color: #004872;
+    transform: translateX(10px);
+}
+

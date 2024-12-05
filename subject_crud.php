@@ -1,7 +1,36 @@
 <?php
 include ('base.php');
 ?>
-    <div class="container mt-5">
+
+<!-- Dashboard Container -->
+<div class="dashboard-container">
+<div class="dashboard-container">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+             <a class="navbar-brand" href="#">Dashboard</a>
+             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                 <span class="navbar-toggler-icon"></span>
+             </button>
+              <div class="collapse navbar-collapse" id="navbarNav">
+                  <ul class="navbar-nav">
+                     <li class="nav-item">
+                         <a class="nav-link active" href="admin_dashboard.php">Home</a>
+                     </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="admin_crud.php">Admins</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="student_crud.php">Students</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="subject_crud.php">Subjects</a>
+                        </li>
+                    </ul>
+                </div>
+             </div>
+        </nav>
+
+        <div class="container mt-5">
         <!-- modal ng add subject -->
         <div class="modal fade" id="addSubjectModal" tabindex="-1" aria-labelledby="addSubjectModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -53,8 +82,6 @@ if (!empty($search)) {
 $result = $conn->query($query);
 ?>
 
-<!-- Dashboard Container -->
-<div class="dashboard-container">
     <!-- Subject Search Bar -->
     <form method="get" action="" class="mb-3">
         <div class="input-group">
