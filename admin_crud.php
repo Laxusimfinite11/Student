@@ -47,7 +47,7 @@ include ('base.php');
             </div>
         </div>
 
-        <!-- add student button dito -->
+        <!-- add admin button dito -->
         <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#addAdminModal">Add Admin</button>
 
         <!-- ito dashboard -->
@@ -129,7 +129,7 @@ $result = $conn->query($query);
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="editModalLabel<?php echo $row['user_id']; ?>">Edit Admin</h5>
+                                    <h5 class="modal-title" id="editModalLabel<?php echo $row['user_id']; ?>">Edit User</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
@@ -173,6 +173,16 @@ $result = $conn->query($query);
                                                 name="mobile_number" 
                                                 value="<?php echo htmlspecialchars($row['mobile_number']); ?>">
                                         </div>
+                                        <div class="mb-3">
+                                            <label for="password<?php echo $row['user_id']; ?>" class="form-label">Password</label>
+                                            <input 
+                                                type="password" 
+                                                class="form-control" 
+                                                id="password<?php echo $row['user_id']; ?>" 
+                                                name="password" 
+                                                placeholder="Leave password blank if not edited"
+                                                value="">
+                                        </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                             <button type="submit" class="btn btn-primary">Save Changes</button>
@@ -183,7 +193,6 @@ $result = $conn->query($query);
                         </div>
                     </div>
 
-                    <!-- Delete Modal for Each Admin -->
                     <div class="modal fade" id="deleteModal-<?php echo $row['user_id']; ?>" tabindex="-1" aria-labelledby="deleteModalLabel-<?php echo $row['user_id']; ?>" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -193,7 +202,7 @@ $result = $conn->query($query);
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <p>Are you sure you want to delete admin <strong><?php echo $row['first_name'] . ' ' . $row['last_name']; ?></strong>?</p>
+                                        <p>Are you sure you want to delete user <strong><?php echo $row['first_name'] . ' ' . $row['last_name']; ?></strong>?</p>
                                         <input type="hidden" name="user_id" value="<?php echo $row['user_id']; ?>">
                                     </div>
                                     <div class="modal-footer">

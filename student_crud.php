@@ -162,7 +162,95 @@ include ('base.php');
                                     </button>
                                 </td>
                             </tr>
-                            <!-- Include modals here (edit and delete modals are unchanged) -->
+                            <!-- Edit Modal for Each User -->
+                    <div class="modal fade" id="editModal<?php echo $row['user_id']; ?>" tabindex="-1" aria-labelledby="editModalLabel<?php echo $row['user_id']; ?>" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="editModalLabel<?php echo $row['user_id']; ?>">Edit User</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="edit_student.php" method="POST">
+                                        <!-- Hidden field for user ID -->
+                                        <input type="hidden" name="user_id" value="<?php echo $row['user_id']; ?>">
+
+                                        <div class="mb-3">
+                                            <label for="firstName<?php echo $row['user_id']; ?>" class="form-label">First Name</label>
+                                            <input 
+                                                type="text" 
+                                                class="form-control" 
+                                                id="firstName<?php echo $row['user_id']; ?>" 
+                                                name="first_name" 
+                                                value="<?php echo htmlspecialchars($row['first_name']); ?>">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="lastName<?php echo $row['user_id']; ?>" class="form-label">Last Name</label>
+                                            <input 
+                                                type="text" 
+                                                class="form-control" 
+                                                id="lastName<?php echo $row['user_id']; ?>" 
+                                                name="last_name" 
+                                                value="<?php echo htmlspecialchars($row['last_name']); ?>">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="email<?php echo $row['user_id']; ?>" class="form-label">Email</label>
+                                            <input 
+                                                type="email" 
+                                                class="form-control" 
+                                                id="email<?php echo $row['user_id']; ?>" 
+                                                name="email" 
+                                                value="<?php echo htmlspecialchars($row['email']); ?>">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="mobileNumber<?php echo $row['user_id']; ?>" class="form-label">Mobile Number</label>
+                                            <input 
+                                                type="text" 
+                                                class="form-control" 
+                                                id="mobileNumber<?php echo $row['user_id']; ?>" 
+                                                name="mobile_number" 
+                                                value="<?php echo htmlspecialchars($row['mobile_number']); ?>">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="password<?php echo $row['user_id']; ?>" class="form-label">Password</label>
+                                            <input 
+                                                type="password" 
+                                                class="form-control" 
+                                                id="password<?php echo $row['user_id']; ?>" 
+                                                name="password" 
+                                                placeholder="Leave password blank if not edited"
+                                                value="">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-primary">Save Changes</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="deleteModal-<?php echo $row['user_id']; ?>" tabindex="-1" aria-labelledby="deleteModalLabel-<?php echo $row['user_id']; ?>" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <form action="delete_student.php" method="POST">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="deleteModalLabel-<?php echo $row['user_id']; ?>">Delete Confirmation</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Are you sure you want to delete user <strong><?php echo $row['first_name'] . ' ' . $row['last_name']; ?></strong>?</p>
+                                        <input type="hidden" name="user_id" value="<?php echo $row['user_id']; ?>">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                        <button type="submit" class="btn btn-danger">Delete</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                         <?php endforeach; ?>
                     <?php else: ?>
                         <tr>
