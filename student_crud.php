@@ -92,6 +92,7 @@ include ('base.php');
         }
 
 
+
         if ($top_performers) {
             $students = array_filter($students, function($student) {
                 return $student['gwa'] >= 1.0 && $student['gwa'] <= 2.0;

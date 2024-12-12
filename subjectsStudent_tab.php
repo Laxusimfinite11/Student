@@ -22,19 +22,19 @@ $subjectresult = $conn->query($query);
                     echo $studentrow['user_id'];
                 ?></span></h5>
                 <h4 class="mt-4">Subjects</h4>
-                <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#addSubjectModal">Enroll Subject</button>
                 <table class="table table-striped text-center">
                     <thead>
                         <tr>
                             <th>Subject Code</th>
                             <th>Subject Name</th>
                             <th>Grade</th>
-                            <th>U/D</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php if ($subjectresult->num_rows > 0): ?>
                             <?php while ($row = $subjectresult->fetch_assoc()): ?>
+
                                 <!-- Check the grades, pass or fail -->
                                 <?php $status = "";
 
@@ -63,26 +63,12 @@ $subjectresult = $conn->query($query);
                                     else {
                                         $grade = $row['grades'];
                                     } ?>
+
                                 <tr>
                                     <td><?php echo htmlspecialchars($row['subjectID']); ?></td>
                                     <td><?php echo htmlspecialchars($row['name']); ?></td>
                                     <td><?php echo htmlspecialchars($grade); ?></td>
                                     <td><?php echo ($status); ?></td>
-                                    <td>
-                                        <!-- Edit Button -->
-                                        <button class="btn btn-warning btn-sm" 
-                                                data-bs-toggle="modal" 
-                                                data-bs-target="#editModal-<?php echo htmlspecialchars($row['subjectID']); ?>">
-                                            Edit
-                                        </button>
-
-                                        <!-- Unenroll Button -->
-                                        <button class="btn btn-danger btn-sm" 
-                                                data-bs-toggle="modal" 
-                                                data-bs-target="#unenrollModal-<?php echo htmlspecialchars($row['subjectID']); ?>">
-                                            Unenroll
-                                        </button>
-                                    </td>
                                 </tr>
 
                                 <!-- Edit Modal -->
