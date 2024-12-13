@@ -11,7 +11,7 @@
     color: #024059;
     font-size: 24px;
     margin: 0;
-    font-weight: 600;
+    font-weight: bold;
 }
 
 .navbar .navbar-nav {
@@ -32,21 +32,6 @@
 .navbar .nav-link:hover {
     color: #28a745;
 }
-
-.navbar .btn-log-out {
-    background-color: #28a745;
-    color: white;
-    border-radius: 5px;
-    padding: 10px 20px;
-    font-size: 16px;
-    border: none;
-    text-decoration: none;
-}
-
-.navbar .btn-log-out:hover {
-    background-color: #175825;
-}
-
 
 body {
     background-color: #024059;
