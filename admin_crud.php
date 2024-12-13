@@ -3,7 +3,7 @@ include ('base.php');
 ?>
 
 <!-- Dashboard Container -->
-<div class="dashboard-container">
+
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
@@ -30,7 +30,9 @@ include ('base.php');
              </div>
         </nav>
 
+<div class="dashboard-container">
 <div class="container mt-5">
+    
         <!-- modal ng add admin -->
         <div class="modal fade" id="addAdminModal" tabindex="-1" aria-labelledby="addAdminModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -104,6 +106,7 @@ $result = $conn->query($query);
 ?>
 
     <!-- Admin Search Bar -->
+     
     <form method="get" action="" class="mb-3">
         <div class="input-group">
             <input type="text" name="search" id="searchInput" class="form-control" 
@@ -239,6 +242,7 @@ $result = $conn->query($query);
             <?php endif; ?>
         </tbody>
     </table>
+</div>
 </div>
 
 
