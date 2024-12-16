@@ -1,7 +1,7 @@
 <?php
 include ('base.php');
 ?>
-    <!-- Links Section -->
+    
     <div class="container mt-5 text-center">
         <h2 style="color: white;">Manage Users</h2>
         <div class="d-flex justify-content-center mt-4">

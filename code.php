@@ -5,7 +5,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $input_email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
     $input_password = $_POST['password'];
 
-    // Prepare SQL statement
+   
     $stmt = $conn->prepare("SELECT user_id, password, first_name, last_name, role FROM users WHERE email = ? LIMIT 1");
     $stmt->bind_param("s", $input_email);
 

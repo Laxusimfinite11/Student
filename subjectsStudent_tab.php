@@ -35,7 +35,7 @@ $subjectresult = $conn->query($query);
                         <?php if ($subjectresult->num_rows > 0): ?>
                             <?php while ($row = $subjectresult->fetch_assoc()): ?>
 
-                                <!-- Check the grades, pass or fail -->
+                                
                                 <?php $status = "";
 
                                     if ($row["grades"] < 1) {
@@ -53,7 +53,6 @@ $subjectresult = $conn->query($query);
                                         $status = "<p style='color: red;'>failed</p>";
                                 } ?>
 
-                                <!-- Check if grades has already grade if not return no grade -->
                                  <?php $grade = "";
                                  
                                     if ($row["grades"] < 1) {
@@ -71,54 +70,7 @@ $subjectresult = $conn->query($query);
                                     <td><?php echo ($status); ?></td>
                                 </tr>
 
-                                <!-- Edit Modal -->
-                                <div class="modal fade" id="editModal-<?php echo htmlspecialchars($row['subjectID']); ?>" tabindex="-1" aria-labelledby="editModalLabel-<?php echo htmlspecialchars($row['subjectID']); ?>" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <form action="edit_grades.php" method="POST">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="editModalLabel-<?php echo htmlspecialchars($row['subjectID']); ?>">Edit Subject</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <input type="hidden" name="subjectID" value="<?php echo htmlspecialchars($row['subjectID']); ?>">
-                                                    <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($studentrow['user_id']); ?>">
-                                                    <div class="mb-3">
-                                                        <label for="subjectGrades-<?php echo htmlspecialchars($row['subjectID']); ?>" class="form-label">Grades</label>
-                                                        <input type="text" class="form-control" id="subjectGrades-<?php echo htmlspecialchars($row['subjectID']); ?>" name="grades" value="<?php echo htmlspecialchars($row['grades']); ?>" required>
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                                    <button type="submit" class="btn btn-primary">Save Changes</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Unenroll Modal -->
-                                <div class="modal fade" id="unenrollModal-<?php echo htmlspecialchars($row['subjectID']); ?>" tabindex="-1" aria-labelledby="unenrollModalLabel-<?php echo htmlspecialchars($row['subjectID']); ?>" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <form action="unenroll_subject.php" method="POST">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="unenrollModalLabel-<?php echo htmlspecialchars($row['subjectID']); ?>">Unenroll Confirmation</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <p>Are you sure you want to unenroll from the subject "<strong><?php echo htmlspecialchars($row['name']); ?></strong>"?</p>
-                                                    <input type="hidden" name="subjectID" value="<?php echo htmlspecialchars($row['subjectID']); ?>">
-                                                    <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($studentrow['user_id']); ?>">
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                                    <button type="submit" class="btn btn-danger">Unenroll</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
+                                
                             <?php endwhile; ?>
                         <?php else: ?>
                             <tr>
@@ -132,7 +84,7 @@ $subjectresult = $conn->query($query);
         </div>
     </div>
 
-    <!-- dit add subject -->
+    
     <div class="modal fade" id="addSubjectModal" tabindex="-1" aria-labelledby="addSubjectModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -142,14 +94,14 @@ $subjectresult = $conn->query($query);
             </div>
             <div class="modal-body">
                 <form id="addSubjectForm" action="enroll_subject.php" method="POST">
-                    <!-- Subject Dropdown -->
+                    
                     <div class="mb-3">
                         <input type="hidden" name="user_id" value="<?php echo $studentrow['user_id']; ?>">
                         <label for="subjectDropdown" class="form-label">Select Subject</label>
                         <select class="form-select" id="subjectDropdown" name="subject_id" required>
                         <option value="">Select a Subject</option>
                             <?php
-                            // Fetch subjects from the database
+                            
                             include('conn.php');
                             $query = "SELECT subjectid, name FROM subject";
                             $result = mysqli_query($conn, $query);
@@ -166,7 +118,7 @@ $subjectresult = $conn->query($query);
 
                     </div>
 
-                    <!-- Other input fields -->
+                    
                     <div class="text-end">
                         <button type="submit" class="btn btn-success">Enroll Subject</button>
                     </div>

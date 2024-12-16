@@ -2,7 +2,7 @@
 include ('base.php');
 ?>
     <div class="container mt-5">
-        <!-- modal ng add subject -->
+        
         <div class="modal fade" id="addSubjectModal" tabindex="-1" aria-labelledby="addSubjectModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -29,21 +29,21 @@ include ('base.php');
             </div>
         </div>
 
-        <!-- add student button dito -->
+        
         <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#addSubjectModal">Add Subject</button>
 
-        <!-- ito dashboard -->
+        
         <?php
-// Handle search query for subjects
+
 $search = isset($_GET['search']) ? $conn->real_escape_string($_GET['search']) : '';
 
-// Query to fetch subjects with optional search filtering
+
 $query = "
     SELECT subjectID, name, description
     FROM subject
 ";
 
-// Append search condition if search input is provided
+
 if (!empty($search)) {
     $query .= " WHERE subjectID LIKE '%$search%' 
                 OR name LIKE '%$search%' 
@@ -53,9 +53,9 @@ if (!empty($search)) {
 $result = $conn->query($query);
 ?>
 
-<!-- Dashboard Container -->
+
 <div class="dashboard-container">
-    <!-- Subject Search Bar -->
+    
     <form method="get" action="" class="mb-3">
         <div class="input-group">
             <input type="text" name="search" id="searchInput" class="form-control" 
@@ -65,7 +65,7 @@ $result = $conn->query($query);
         </div>
     </form>
 
-    <!-- Subject Table -->
+    
     <table class="table table-striped">
         <thead>
             <tr>
@@ -83,14 +83,14 @@ $result = $conn->query($query);
                         <td><?php echo htmlspecialchars($row['name']); ?></td>
                         <td><?php echo htmlspecialchars($row['description']); ?></td>
                         <td>
-                            <!-- Edit Button -->
+                            
                             <button class="btn btn-warning btn-sm" 
                                     data-bs-toggle="modal" 
                                     data-bs-target="#editModal-<?php echo htmlspecialchars($row['subjectID']); ?>">
                                 Edit
                             </button>
 
-                            <!-- Delete Button -->
+                            
                             <button class="btn btn-danger btn-sm" 
                                     data-bs-toggle="modal" 
                                     data-bs-target="#deleteModal-<?php echo htmlspecialchars($row['subjectID']); ?>">
@@ -99,7 +99,7 @@ $result = $conn->query($query);
                         </td>
                     </tr>
 
-                    <!-- Edit Modal -->
+                    
                     <div class="modal fade" id="editModal-<?php echo htmlspecialchars($row['subjectID']); ?>" tabindex="-1" aria-labelledby="editModalLabel-<?php echo htmlspecialchars($row['subjectID']); ?>" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -128,7 +128,7 @@ $result = $conn->query($query);
                         </div>
                     </div>
 
-                    <!-- Delete Modal -->
+                    
                     <div class="modal fade" id="deleteModal-<?php echo htmlspecialchars($row['subjectID']); ?>" tabindex="-1" aria-labelledby="deleteModalLabel-<?php echo htmlspecialchars($row['subjectID']); ?>" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">

@@ -23,7 +23,7 @@ $result = $conn->query($query);
     <link rel="stylesheet" href="bootstrap/css/dashboard.css">
 </head>
 <body style="background-color: #024059;">
-    <!-- Navbar -->
+    
     <nav class="navbar navbar-expand-lg">
     <div class="container">
         <a class="navbar-brand" href="#">
@@ -38,7 +38,7 @@ $result = $conn->query($query);
                 }
 
                 else{
-                    // dito ilagay yung tabs ng sa student dashboard
+                   
                     echo '';
                 }
             ?>

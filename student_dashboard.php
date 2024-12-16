@@ -3,12 +3,12 @@ include ('base.php');
 $user_id = $_SESSION['user_id'];
 ?>
 
-    <!-- Links Section -->
+    
     <div class="container mt-5 text-center">
         <h2 style="color: white;">Manage Users</h2>
         <div class="d-flex justify-content-center mt-4">
             
-            <!-- <a href="student_grade.php" class="btn btn-primary me-3">See Grades</a> -->
+            
 
             <form action="subjectsStudent_tab.php" method="get">
                 <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
