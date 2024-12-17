@@ -29,7 +29,8 @@ $subjectresult = $conn->query($query);
                             <th>Subject Code</th>
                             <th>Subject Name</th>
                             <th>Grade</th>
-                            <th>U/D</th>
+                            <th>Status</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>

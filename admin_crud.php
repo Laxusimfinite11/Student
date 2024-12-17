@@ -2,7 +2,7 @@
 include ('base.php');
 ?>
     <div class="container mt-5">
-        
+        <!-- modal ng add admin -->
         <div class="modal fade" id="addAdminModal" tabindex="-1" aria-labelledby="addAdminModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -47,22 +47,22 @@ include ('base.php');
             </div>
         </div>
 
-        
+        <!-- add student button dito -->
         <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#addAdminModal">Add Admin</button>
 
-        
+        <!-- ito dashboard -->
         <?php
-
+// Handle search query for admins
 $search = isset($_GET['search']) ? $conn->real_escape_string($_GET['search']) : '';
 
-
+// Query to fetch admins with optional search filtering
 $query = "
     SELECT user_id, first_name, last_name, email, mobile_number
     FROM users
     WHERE role = 'Admin'
 ";
 
-
+// Append search condition if search input is provided
 if (!empty($search)) {
     $query .= " AND (user_id LIKE '%$search%' 
                 OR first_name LIKE '%$search%' 
@@ -74,9 +74,9 @@ if (!empty($search)) {
 $result = $conn->query($query);
 ?>
 
-
+<!-- Dashboard Container -->
 <div class="dashboard-container">
-    
+    <!-- Admin Search Bar -->
     <form method="get" action="" class="mb-3">
         <div class="input-group">
             <input type="text" name="search" id="searchInput" class="form-control" 
@@ -86,7 +86,7 @@ $result = $conn->query($query);
         </div>
     </form>
 
-    
+    <!-- Admin Table -->
     <table class="table table-striped">
         <thead>
             <tr>
@@ -108,7 +108,7 @@ $result = $conn->query($query);
                         <td><?php echo $row['email']; ?></td>
                         <td><?php echo $row['mobile_number']; ?></td>
                         <td>
-                            
+                            <!-- Edit Button -->
                             <button 
                                 class="btn btn-warning btn-sm" 
                                 data-bs-toggle="modal" 
@@ -116,7 +116,7 @@ $result = $conn->query($query);
                                 Edit
                             </button>
 
-                            
+                            <!-- Delete Button -->
                             <button class="btn btn-danger btn-sm" 
                                     data-bs-toggle="modal" 
                                     data-bs-target="#deleteModal-<?php echo $row['user_id']; ?>">
@@ -124,17 +124,17 @@ $result = $conn->query($query);
                             </button>
                         </td>
                     </tr>
-                    
+                    <!-- Edit Modal for Each Admin -->
                     <div class="modal fade" id="editModal<?php echo $row['user_id']; ?>" tabindex="-1" aria-labelledby="editModalLabel<?php echo $row['user_id']; ?>" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="editModalLabel<?php echo $row['user_id']; ?>">Edit User</h5>
+                                    <h5 class="modal-title" id="editModalLabel<?php echo $row['user_id']; ?>">Edit Admin</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
                                     <form action="edit_admin.php" method="POST">
-                                        
+                                        <!-- Hidden field for user ID -->
                                         <input type="hidden" name="user_id" value="<?php echo $row['user_id']; ?>">
 
                                         <div class="mb-3">
@@ -165,26 +165,13 @@ $result = $conn->query($query);
                                                 value="<?php echo htmlspecialchars($row['email']); ?>">
                                         </div>
                                         <div class="mb-3">
-                                        <label for="mobileNumber<?php echo $row['user_id']; ?>" class="form-label">Mobile Number</label>
-                                        <div class="input-group">
-                                    <span class="input-group-text">+63</span>
-                                    
+                                            <label for="mobileNumber<?php echo $row['user_id']; ?>" class="form-label">Mobile Number</label>
                                             <input 
                                                 type="text" 
                                                 class="form-control" 
                                                 id="mobileNumber<?php echo $row['user_id']; ?>" 
                                                 name="mobile_number" 
                                                 value="<?php echo htmlspecialchars($row['mobile_number']); ?>">
-                                </div>
-                                        <div class="mb-3">
-                                            <label for="password<?php echo $row['user_id']; ?>" class="form-label">Password</label>
-                                            <input 
-                                                type="password" 
-                                                class="form-control" 
-                                                id="password<?php echo $row['user_id']; ?>" 
-                                                name="password" 
-                                                placeholder="Leave password blank if not edited"
-                                                value="">
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -196,6 +183,7 @@ $result = $conn->query($query);
                         </div>
                     </div>
 
+                    <!-- Delete Modal for Each Admin -->
                     <div class="modal fade" id="deleteModal-<?php echo $row['user_id']; ?>" tabindex="-1" aria-labelledby="deleteModalLabel-<?php echo $row['user_id']; ?>" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -205,7 +193,7 @@ $result = $conn->query($query);
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <p>Are you sure you want to delete user <strong><?php echo $row['first_name'] . ' ' . $row['last_name']; ?></strong>?</p>
+                                        <p>Are you sure you want to delete admin <strong><?php echo $row['first_name'] . ' ' . $row['last_name']; ?></strong>?</p>
                                         <input type="hidden" name="user_id" value="<?php echo $row['user_id']; ?>">
                                     </div>
                                     <div class="modal-footer">
