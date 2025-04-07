@@ -2,6 +2,7 @@
 include ('conn.php');
 session_start();
 
+// Check if the login is succesful to avoid visiting the page if failed attempt
 if(empty($_SESSION['first_name'])){
     header("Location: logout.php");
 }
