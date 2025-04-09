@@ -1,6 +1,7 @@
 <?php
 include ('base.php');
 ?>
+<<<<<<< HEAD
 <body>
 
         <!-- Dashboard Container -->
@@ -32,6 +33,10 @@ include ('base.php');
 
         <div class="container mt-5">
         <!-- modal ng add student -->
+=======
+    <div class="container mt-5">
+        
+>>>>>>> 33834b33b9055b07851b95d34f63a16cad2e2eb7
         <div class="modal fade" id="addStudentModal" tabindex="-1" aria-labelledby="addStudentModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -76,13 +81,13 @@ include ('base.php');
             </div>
         </div>
 
-        <!-- add student button dito -->
+        
         <button class="btn btn-success mb-3" data-bs-toggle="modal" data-bs-target="#addStudentModal">Add Student</button>
 
-        <!-- search query modal -->
+        
         <?php
         $search = isset($_GET['search']) ? $conn->real_escape_string($_GET['search']) : '';
-        $top_performers = isset($_GET['top_performers']) ? true : false;  // Check if Top Performers button is clicked
+        $top_performers = isset($_GET['top_performers']) ? true : false;  
 
         $query = "
             SELECT u.user_id, u.first_name, u.last_name, u.email, u.mobile_number
@@ -121,6 +126,7 @@ include ('base.php');
         }
 
 
+
         if ($top_performers) {
             $students = array_filter($students, function($student) {
                 return $student['gwa'] >= 1.0 && $student['gwa'] <= 2.0;
@@ -128,7 +134,13 @@ include ('base.php');
         }
         ?>
 
+<<<<<<< HEAD
             <!-- Search Bar -->
+=======
+        
+        <div class="dashboard-container">
+            
+>>>>>>> 33834b33b9055b07851b95d34f63a16cad2e2eb7
             <form method="get" action="" class="mb-3">
                 <div class="input-group">
                     <input type="text" name="search" id="searchInput" class="form-control" 
@@ -138,14 +150,14 @@ include ('base.php');
                 </div>
             </form>
 
-            <!-- Top Performers Button -->
+            
             <form method="get" action="" class="mb-3">
                 <button type="submit" class="btn btn-success" name="top_performers" value="1">
                     Top Performers
                 </button>
             </form>
 
-            <!-- User Table -->
+            
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -176,7 +188,7 @@ include ('base.php');
                                     </form>
                                 </td>
                                 <td>
-                                    <!-- Edit and Delete Buttons -->
+                                    
                                     <button class="btn btn-warning btn-sm" 
                                             data-bs-toggle="modal" 
                                             data-bs-target="#editModal<?php echo $row['user_id']; ?>">
@@ -189,7 +201,7 @@ include ('base.php');
                                     </button>
                                 </td>
                             </tr>
-                            <!-- Edit Modal for Each User -->
+                            
                     <div class="modal fade" id="editModal<?php echo $row['user_id']; ?>" tabindex="-1" aria-labelledby="editModalLabel<?php echo $row['user_id']; ?>" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -199,7 +211,7 @@ include ('base.php');
                                 </div>
                                 <div class="modal-body">
                                     <form action="edit_student.php" method="POST">
-                                        <!-- Hidden field for user ID -->
+                                        
                                         <input type="hidden" name="user_id" value="<?php echo $row['user_id']; ?>">
 
                                         <div class="mb-3">
@@ -292,7 +304,16 @@ include ('base.php');
                 </tbody>
             </table>
         </div>
+<<<<<<< HEAD
     <!-- modal ng delete -->
+=======
+
+
+
+
+
+    
+>>>>>>> 33834b33b9055b07851b95d34f63a16cad2e2eb7
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>

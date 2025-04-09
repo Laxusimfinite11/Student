@@ -33,14 +33,14 @@ mysqli_close($conn);
     <div class="container">
         <h1>Subject Enrollment</h1>
         
-        <!-- Display success or error message -->
+        
         <div class="alert <?php echo (isset($message) && strpos($message, 'Successfully') !== false) ? 'alert-success' : 'alert-danger'; ?>" role="alert">
             <?php echo $message; ?>
         </div>
         
-        <!-- Button to go back to the subject list -->
+        
         <form action="subjects_tab.php" method="get">
-            <input type="hidden" name="user_id" value="<?php echo $user_id; ?>"> <!-- Pass the user_id properly -->
+            <input type="hidden" name="user_id" value="<?php echo $user_id; ?>"> 
             <button type="submit" class="btn btn-view-subjects btn-sm">View Subjects</button>
         </form>
     </div>

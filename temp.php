@@ -1,53 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>Material Design for Bootstrap</title>
-    <!-- MDB icon -->
-    <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon" />
-    <!-- Font Awesome -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    />
-    <!-- Google Fonts Roboto -->
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap"
-    />
-    <!-- MDB -->
-    <link rel="stylesheet" href="css/mdb.min.css" />
-  </head>
-  <body>
-    <!-- Start your project here-->
-    <div class="container">
-      <div class="d-flex justify-content-center align-items-center" style="height: 100vh">
-        <div class="text-center">
-          <img
-            class="mb-4"
-            src="https://mdbootstrap.com/img/logo/mdb-transparent-250px.png"
-            style="width: 250px; height: 90px"
-          />
-          <h5 class="mb-3">Thank you for using our product. We're glad you're with us.</h5>
-          <p class="mb-3">MDB Team</p>
-          <a
-            class="btn btn-primary btn-lg"
-            data-mdb-ripple-init
-            href="https://mdbootstrap.com/docs/standard/getting-started/"
-            target="_blank"
-            role="button"
-            >Start MDB tutorial</a
-          >
-        </div>
-      </div>
-    </div>
-    <!-- End your project here-->
+<?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
-    <!-- MDB -->
-    <script type="text/javascript" src="js/mdb.umd.min.js"></script>
-    <!-- Custom scripts -->
-    <script type="text/javascript"></script>
-  </body>
-</html>
+require 'vendor/autoload.php'; // Make sure PHPMailer is installed via Composer
+
+// Create a new PHPMailer instance
+$mail = new PHPMailer(true);
+
+try {
+    // Server settings
+    $mail->isSMTP();                                 // Use SMTP
+    $mail->Host       = 'smtp.gmail.com';            // Gmail SMTP server
+    $mail->SMTPAuth   = true;                        // Enable SMTP authentication
+    $mail->Username   = 'laxustaladro@gmail.com'; // Your email
+    $mail->Password   = 'qnjmwzichmfecyki';       //Replace with your real password or App Password
+    $mail->SMTPSecure = 'tls';                       // Enable TLS encryption
+    $mail->Port       = 587;                         // TCP port to connect to
+
+    // Recipients
+    $mail->setFrom('laxustaladro@gmail.com', 'Lexus from PSU');
+    $mail->addAddress('202280017@psu.palawan.edu.ph', 'Lexus Taladro');
+
+    // Content
+    $mail->isHTML(true);                             // Set email format to HTML
+    $mail->Subject = 'Test Email from Lexus';
+    $mail->Body    = '<strong>Hello Lexus,</strong><br>This is a test email sent using PHPMailer. <br><br>Blessings! 🙏';
+
+    $mail->send();
+    echo 'Message has been sent successfully!';
+} catch (Exception $e) {
+    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+}
+?>

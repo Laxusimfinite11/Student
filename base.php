@@ -2,7 +2,8 @@
 include ('conn.php');
 session_start();
 
-if(empty($_SESSION['first_name'])){
+// Check if the login is successful to avoid visiting the page if login failed
+if (empty($_SESSION['first_name'])) {
     header("Location: logout.php");
 }
 
@@ -23,4 +24,31 @@ $result = $conn->query($query);
     <link rel="stylesheet" href="bootstrap/css/dashboard.css">
 </head>
 <body style="background-color: #024059;">
+
+<nav class="navbar navbar-expand-lg">
+    <div class="container">
+        <a class="navbar-brand" href="#">
+            <h1>Welcome!</h1>
+            <h1><?php echo htmlspecialchars($user_role) . ":"; ?> <?php echo htmlspecialchars($user_first); ?> <?php echo htmlspecialchars($user_last); ?></h1>
+        </a>
+        <div class="navbar-nav ms-auto">
+            <a href="index.php" class="btn btn-primary me-2">Home</a>
+            <?php
+                if ($user_role == 'Admin') {
+                    echo '
+                        <a href="student_crud.php" class="btn btn-primary me-2">Students</a>
+                        <a href="admin_crud.php" class="btn btn-primary me-2">Admins</a>
+                        <a href="subject_crud.php" class="btn btn-primary me-2">Subjects</a>
+                    ';
+                } else {
+                    // Placeholder for student-specific links
+                    echo '';
+                }
+            ?>
+            <a href="logout.php" class="btn btn-log-out">Log Out</a>
+        </div>
+    </div>
+</nav>
+
 </body>
+</html>

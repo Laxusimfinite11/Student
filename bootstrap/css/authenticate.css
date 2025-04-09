@@ -1,0 +1,16 @@
+
+.login-container h5 {
+ text-align: center;
+}
+
+.but {
+    display: flex;
+    justify-content: center;  /* Horizontally center */
+    align-items: center;      /* Vertically center */
+}
+
+.but button {
+    margin: 5px;
+    max-width: 70%;
+
+}

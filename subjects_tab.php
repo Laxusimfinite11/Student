@@ -29,25 +29,55 @@ $subjectresult = $conn->query($query);
                             <th>Subject Code</th>
                             <th>Subject Name</th>
                             <th>Grade</th>
-                            <th>U/D</th>
+                            <th>Status</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php if ($subjectresult->num_rows > 0): ?>
                             <?php while ($row = $subjectresult->fetch_assoc()): ?>
+                                
+                                <?php $status = "";
+
+                                    if ($row["grades"] < 1) {
+                                        $status = "";
+                                    }
+                                    else if ($row['grades'] <= 3) {
+                                        $status = "<p style='color: green;'>passed</p>";
+                                    }
+
+                                    else if ($row['grades'] <= 4) {
+                                        $status = "<p style='color: #FFA500;'>incomplete</p>";
+                                    }
+
+                                    else {
+                                        $status = "<p style='color: red;'>failed</p>";
+                                } ?>
+
+                                
+                                 <?php $grade = "";
+                                 
+                                    if ($row["grades"] < 1) {
+                                        $grade = "No-grade";
+                                    }
+
+                                    else {
+                                        $grade = $row['grades'];
+                                    } ?>
                                 <tr>
                                     <td><?php echo htmlspecialchars($row['subjectID']); ?></td>
                                     <td><?php echo htmlspecialchars($row['name']); ?></td>
-                                    <td><?php echo htmlspecialchars($row['grades']); ?></td>
+                                    <td><?php echo htmlspecialchars($grade); ?></td>
+                                    <td><?php echo ($status); ?></td>
                                     <td>
-                                        <!-- Edit Button -->
+                                        
                                         <button class="btn btn-warning btn-sm" 
                                                 data-bs-toggle="modal" 
                                                 data-bs-target="#editModal-<?php echo htmlspecialchars($row['subjectID']); ?>">
                                             Edit
                                         </button>
 
-                                        <!-- Unenroll Button -->
+                                       
                                         <button class="btn btn-danger btn-sm" 
                                                 data-bs-toggle="modal" 
                                                 data-bs-target="#unenrollModal-<?php echo htmlspecialchars($row['subjectID']); ?>">
@@ -56,7 +86,7 @@ $subjectresult = $conn->query($query);
                                     </td>
                                 </tr>
 
-                                <!-- Edit Modal -->
+                                
                                 <div class="modal fade" id="editModal-<?php echo htmlspecialchars($row['subjectID']); ?>" tabindex="-1" aria-labelledby="editModalLabel-<?php echo htmlspecialchars($row['subjectID']); ?>" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
@@ -82,7 +112,7 @@ $subjectresult = $conn->query($query);
                                     </div>
                                 </div>
 
-                                <!-- Unenroll Modal -->
+                                
                                 <div class="modal fade" id="unenrollModal-<?php echo htmlspecialchars($row['subjectID']); ?>" tabindex="-1" aria-labelledby="unenrollModalLabel-<?php echo htmlspecialchars($row['subjectID']); ?>" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
@@ -117,7 +147,7 @@ $subjectresult = $conn->query($query);
         </div>
     </div>
 
-    <!-- dit add subject -->
+    
     <div class="modal fade" id="addSubjectModal" tabindex="-1" aria-labelledby="addSubjectModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -127,14 +157,14 @@ $subjectresult = $conn->query($query);
             </div>
             <div class="modal-body">
                 <form id="addSubjectForm" action="enroll_subject.php" method="POST">
-                    <!-- Subject Dropdown -->
+                    
                     <div class="mb-3">
                         <input type="hidden" name="user_id" value="<?php echo $studentrow['user_id']; ?>">
                         <label for="subjectDropdown" class="form-label">Select Subject</label>
                         <select class="form-select" id="subjectDropdown" name="subject_id" required>
                         <option value="">Select a Subject</option>
                             <?php
-                            // Fetch subjects from the database
+                            
                             include('conn.php');
                             $query = "SELECT subjectid, name FROM subject";
                             $result = mysqli_query($conn, $query);
@@ -151,7 +181,7 @@ $subjectresult = $conn->query($query);
 
                     </div>
 
-                    <!-- Other input fields -->
+                    
                     <div class="text-end">
                         <button type="submit" class="btn btn-success">Enroll Subject</button>
                     </div>
