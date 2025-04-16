@@ -1,5 +1,11 @@
 <?php
 include('conn.php');
+include 'log_audit.php';
+session_start();    
+$user_id = $_SESSION['user_id'];
+$admin_name = $_SESSION['first_name'] . " " . $_SESSION['last_name'];
+
+$user_last = $_SESSION['last_name'];
 
 
 $firstname = $_POST['studentName'] ?? '';
@@ -7,7 +13,6 @@ $lastname = $_POST['studentLastName'] ?? '';
 $email = $_POST['studentEmail'] ?? '';
 $mobile_number = $_POST['studentMobileNumber'] ?? '';
 $password = $_POST['studentPassword'] ?? '';
-
 
 
 $firstname = mysqli_real_escape_string($conn, $firstname);
@@ -25,6 +30,7 @@ $query = "INSERT INTO users (first_name, last_name, email, mobile_number, passwo
 
 if (mysqli_query($conn, $query)) {
     $message = "Student Registered Successfully!";
+    logActivity($conn, $user_id, "Add Student", "New student record added by $admin_name. Student '$firstname $lastname' has been successfully registered in the system.");
 } else {
     $message = "Error: " . mysqli_error($conn);
 }

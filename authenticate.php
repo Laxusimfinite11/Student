@@ -7,8 +7,16 @@ if(empty($_SESSION['first_name'])){
     header("Location: logout.php");
 }
 
+if (isset($_SESSION['otp_verified']) && $_SESSION['otp_verified'] === true) {
+    header("Location: admin_dashboard.php");
+    exit();
+}
+
 $user_email = $_SESSION['email'];
 $user_no = $_SESSION['mobile_number'];
+
+$otp_error = isset($_SESSION['otp_error']) ? $_SESSION['otp_error'] : '';
+unset($_SESSION['otp_error']);
 ?>
 
 <!DOCTYPE html>
@@ -25,24 +33,34 @@ $user_no = $_SESSION['mobile_number'];
 <div class="container-fluid">
     <div class="centered-container">
         <div class="login-container">
+            <a href="logout.php" class="btn btn-danger">Cancel</a>
             <h2 class="text-center mb-4">Authenticate</h2>
             <h5>Choose to send your OTP Code</h5>
-            <div class="but">
-                <button class="btn btn-primary w-100" id="emailBtn">Email</button>
-                <button class="btn btn-primary w-100" id="smsBtn">SMS</button>
-            </div>
             <!-- Container to hold the form, initially hidden -->
-            <div id="formContainer" style="display: none; margin-top: 20px;">
+            <div id="formContainer" style="display: block; margin-top: 20px;">
 
                 <!-- Email Form -->
-                <div id="emailForm" style="display: none;">
+                
                     <form action="verify_otp.php" method="post">
-                        <h5>Email: <?php echo htmlspecialchars($user_email); ?></h5>
-                        <input name="otp" id="reqInputEmail" style="display: none;" type="txt" class="form-control" placeholder="Enter OTP Code" required>
-                        <button class="btn btn-primary w-100 mt-3" type="button" id="reqEmailOTP">Request OTP</button>
-                        <button style="display: none;" class="btn btn-primary w-100 mt-3" type="submit" id="butConEmail">Confirm</button>
+                        <div class="but">
+                            <button class="btn btn-primary w-100" id="emailBtn">Email</button>
+                            <button class="btn btn-primary w-100" id="smsBtn">SMS</button>
+                            <input type="hidden" name="userOtpMethod" id="OtpVal" value="">
+                        </div>
+
+                        <div id="emailForm" style="display: none;">
+                            <?php if ($otp_error): ?>
+                                <div class="alert alert-danger" role="alert">
+                                    <?php echo htmlspecialchars($otp_error); ?>
+                                </div>
+                            <?php endif; ?>
+                            <h5>Email: <?php echo htmlspecialchars($user_email); ?></h5>
+                            <input name="otp" id="reqInputEmail" style="display: none;" type="txt" class="form-control" placeholder="Enter OTP Code" required>
+                            <button class="btn btn-primary w-100 mt-3" type="button" id="reqEmailOTP">Request OTP</button>
+                            <button style="display: none;" class="btn btn-primary w-100 mt-3" type="submit" id="butConEmail">Confirm</button>
+                        </div>
                     </form>
-                </div>
+               
 
                 <!-- SMS Form -->
                 <div id="smsForm" style="display: none;">
@@ -60,12 +78,14 @@ $user_no = $_SESSION['mobile_number'];
 
 <script>
 function sendOTP() {
+    const otpMethod = document.getElementById("OtpVal").value;
+    
     fetch('otp_send.php', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
         },
-        body: 'send_otp=true' // You can customize this flag or include more data
+        body: 'send_otp=true&userOtpMethod=' + otpMethod // Pass the method here
     })
     .then(response => response.text())
     .then(data => {
@@ -76,35 +96,33 @@ function sendOTP() {
     });
 }
 
+
     // JavaScript to handle button clicks
     document.getElementById('emailBtn').addEventListener('click', function(event) {
         event.preventDefault(); // Prevent the page reload
         // Show the form container and hide others
-        document.getElementById('formContainer').style.display = 'block';
         document.getElementById('emailForm').style.display = 'block';
         document.getElementById('smsForm').style.display = 'none';
         document.getElementById('reqEmailOTP').style.display = 'block';
         document.getElementById('reqInputEmail').style.display = 'none';
         document.getElementById('butConEmail').style.display = 'none';
-        
-        
+        document.getElementById("OtpVal").value = "email";
     });
 
     document.getElementById('smsBtn').addEventListener('click', function(event) {
         event.preventDefault(); // Prevent the page reload
         // Show the form container and hide others
-        document.getElementById('formContainer').style.display = 'block';
         document.getElementById('smsForm').style.display = 'block'; 
         document.getElementById('emailForm').style.display = 'none';
         document.getElementById('reqSMSOTP').style.display = 'block';
         document.getElementById('reqInputSMS').style.display = 'none';
         document.getElementById('butConSMS').style.display = 'none';
+        document.getElementById("OtpVal").value = "txt";
     });
 
     document.getElementById('reqEmailOTP').addEventListener('click', function(event) {
         event.preventDefault(); // Prevent the page reload
         // Show the form container and hide others
-
         sendOTP();
         document.getElementById('reqEmailOTP').style.display = 'none';
         document.getElementById('reqInputEmail').style.display = 'block';
@@ -118,7 +136,6 @@ function sendOTP() {
         document.getElementById('reqSMSOTP').style.display = 'none';
         document.getElementById('reqInputSMS').style.display = 'block';
         document.getElementById('butConSMS').style.display = 'block';
-
     });
 </script>
 </body>

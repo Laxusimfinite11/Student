@@ -1,5 +1,9 @@
 <?php
 include('conn.php');
+include('log_audit.php');
+session_start();
+$users_id = $_SESSION['user_id'];
+$admin_name = $_SESSION['first_name'] . " " . $_SESSION['last_name'];
 
 $user_id = $_POST['user_id'] ?? '';
 $first_name = $_POST['first_name'] ?? '';

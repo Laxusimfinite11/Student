@@ -1,5 +1,9 @@
 <?php
 include('conn.php');
+include 'log_audit.php';
+session_start();
+$user_id = $_SESSION['user_id'];
+$admin_name = $_SESSION['first_name'] . " " . $_SESSION['last_name'];
 
 
 $firstname = $_POST['adminName'] ?? '';
@@ -25,6 +29,7 @@ $query = "INSERT INTO users (first_name, last_name, email, mobile_number, passwo
 
 if (mysqli_query($conn, $query)) {
     $message = "Admin Registered Successfully!";
+    logActivity($conn, $user_id, "Add Admin", "New admin account created successfully by $admin_name. User $firstname $lastname assigned administrative privileges.");
 } else {
     $message = "Error: " . mysqli_error($conn);
 }

@@ -24,6 +24,10 @@ $result = $conn->query($query);
     <link rel="stylesheet" href="bootstrap/css/dashboard.css">
 </head>
 <body style="background-color: #024059;">
+
+    <div id="floatingNotification" class="toast-notification">
+        <span id="toastMessage"></span>
+    </div>
     
     <nav class="navbar navbar-expand-lg">
     <div class="container">
@@ -43,6 +47,7 @@ $result = $conn->query($query);
                     echo '';
                 }
             ?>
+            <a href="audit_crud.php" class="btn btn-primary me-2">Activity</a>
             <a href="logout.php" class="btn btn-log-out">Log Out</a>
         </div>
     </div>
@@ -51,3 +56,26 @@ $result = $conn->query($query);
 
     
 </body>
+
+<script>
+    const toastMessage = <?php echo json_encode($_SESSION['otp_verified']); ?>;
+
+    function showToast(message, duration = 3000) {
+        const toast = document.getElementById('floatingNotification');
+        const messageSpan = document.getElementById('toastMessage');
+        messageSpan.textContent = message;
+
+        toast.classList.add('show');
+
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, duration);
+    }
+
+
+    if (toastMessage) {
+        showToast(toastMessage);
+    }
+
+
+</script>

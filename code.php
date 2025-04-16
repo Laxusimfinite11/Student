@@ -1,5 +1,6 @@
 <?php
 include('conn.php');
+include('log_audit.php');
 session_start();
 
 if (isset($_SESSION['first_name'])) {
@@ -30,11 +31,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['role'] = $role;
             $_SESSION['mobile_number'] = $no;
 
+            logActivity($conn, $id, "Login", "User successfully logged in.");
+
             header("Location: index.php");
             exit;
                
         } else {
             $error_message = "Invalid email or password.";
+            logActivity($conn, 0, "Failed Login", "Invalid login attempt using email: $input_email");
+
         }
     } else {
         $error_message = "Invalid email or password.";
