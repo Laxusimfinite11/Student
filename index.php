@@ -5,8 +5,9 @@ if(empty($_SESSION['user_id'])){
     header("Location: logout.php");
 }
 
-else if($_SESSION['user_id']){
-    header("Location: authenticate.php");
+else if($_SESSION['user_id'] && $_SESSION['otp_enabled'] == 1){
+    echo $_SESSION['otp_enabled'];
+    exit();
 }
 
 else if($_SESSION['role'] == 'Admin'){

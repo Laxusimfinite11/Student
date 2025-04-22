@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Set error message in session to display later
         $_SESSION['otp_error'] = 'Invalid OTP! Please try again.';
         // Redirect back to authenticate.php
-        logActivity($conn, $id, "OTP Verification Failed", "User entered an incorrect or expired OTP.");
+        logActivity($conn, $user_id, "OTP Verification Failed", "User entered an incorrect or expired OTP.");
         header("Location: authenticate.php");
         exit;
     }

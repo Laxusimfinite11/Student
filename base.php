@@ -21,6 +21,8 @@ $result = $conn->query($query);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="bootstrap/css/base.css">
     <link rel="stylesheet" href="bootstrap/css/dashboard.css">
 </head>
 <body style="background-color: #024059;">
@@ -29,29 +31,35 @@ $result = $conn->query($query);
         <span id="toastMessage"></span>
     </div>
     
-    <nav class="navbar navbar-expand-lg">
-    <div class="container">
-        <a class="navbar-brand" href="#">
-            <h1>Welcome!</h1>
-            <h1><?php echo htmlspecialchars($user_role) . ":"; ?> <?php echo htmlspecialchars($user_first); ?> <?php echo htmlspecialchars($user_last); ?></h1>
-        </a>
-        <div class="navbar-nav ms-auto">
-            <a href="index.php" class="btn btn-primary me-2">Home</a>
-            <?php
-                if ($user_role == 'Admin'){
-                    echo '<a href="student_crud.php" class="btn btn-primary me-2">Students</a><a href="admin_crud.php" class="btn btn-primary me-2">Admins</a><a href="subject_crud.php" class="btn btn-primary me-2">Subjects</a>';
-                }
+    <nav class="navbar">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <h1>Welcome!</h1>
+                <h1><?php echo htmlspecialchars($user_role) . ":"; ?> <?php echo htmlspecialchars($user_first); ?> <?php echo htmlspecialchars($user_last); ?></h1>
+            </a>
+            <div class="navAdmin">
+                <a href="index.php" class="btn btn-primary me-2">Home</a>
+                <?php
+                    if ($user_role == 'Admin'){
+                        echo '<a href="student_crud.php" class="btn btn-primary me-2">Students</a><a href="admin_crud.php" class="btn btn-primary me-2">Admins</a><a href="subject_crud.php" class="btn btn-primary me-2">Subjects</a> <a href="audit_crud.php" class="btn btn-primary me-2">Activity</a>';
+                    }
 
-                else{
-                   
-                    echo '';
-                }
-            ?>
-            <a href="audit_crud.php" class="btn btn-primary me-2">Activity</a>
-            <a href="logout.php" class="btn btn-log-out">Log Out</a>
+                    else{
+                    
+                        echo '';
+                    }
+                ?>
+
+                <a  class="setting" href="settings.php">
+                    <i class="bi bi-gear" id="settings-icon"></i>
+                </a>
+
+                
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
+
+    
 
 
     

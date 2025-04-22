@@ -1,6 +1,8 @@
 <?php
 include('base.php');
 
+$search = isset($_GET['search']) ? $conn->real_escape_string($_GET['search']) : '';
+
 $query = "
     SELECT b.first_name, b.last_name, b.role, 
     a.activity_type, a.activity_description, a.created_at 
@@ -8,9 +10,15 @@ $query = "
     JOIN users AS b ON a.user_id = b.user_id
 ";
 
+if (!empty($search)) {
+    $query .= " AND (role LIKE '%$search%'
+                OR first_name LIKE '%$search%'
+                OR last_name LIKE '%$search%'
+                OR activity_type LIKE '%$search%'
+                OR created_at LIKE '%$search%')";
+}
+
 $result = $conn->query($query);
-
-
 ?>
 
 <div class="container mt-5">

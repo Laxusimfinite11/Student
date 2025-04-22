@@ -14,13 +14,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $input_email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
     $input_password = $_POST['password'];
 
-    $stmt = $conn->prepare("SELECT user_id, password, first_name, last_name, role, mobile_number FROM users WHERE email = ? LIMIT 1");
+    $stmt = $conn->prepare("SELECT user_id, password, first_name, last_name, role, mobile_number, otp_enabled FROM users WHERE email = ? LIMIT 1");
     $stmt->bind_param("s", $input_email);
     $stmt->execute();
     $stmt->store_result();
 
     if ($stmt->num_rows > 0) {
-        $stmt->bind_result($id, $db_password, $first_name, $last_name, $role, $no);
+        $stmt->bind_result($id, $db_password, $first_name, $last_name, $role, $no, $otp_enabled);
         $stmt->fetch();
 
         if (password_verify($input_password, $db_password)) {
@@ -30,6 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['last_name'] = $last_name;
             $_SESSION['role'] = $role;
             $_SESSION['mobile_number'] = $no;
+            $_SESSION['otp_enabled'] = $otp_enabled;
 
             logActivity($conn, $id, "Login", "User successfully logged in.");
 
