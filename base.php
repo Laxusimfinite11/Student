@@ -50,11 +50,12 @@ $result = $conn->query($query);
                     }
                 ?>
 
+                <a href="logout.php" class="btn btn-log-out">Log Out</a>
+
                 <a  class="setting" href="settings.php">
                     <i class="bi bi-gear" id="settings-icon"></i>
                 </a>
 
-                
             </div>
         </div>
     </nav>
