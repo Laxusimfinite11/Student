@@ -1,5 +1,6 @@
 <?php
 include ('conn.php');
+
 session_start();
 
 // Check if the login is succesful to avoid visiting the page if failed attempt
@@ -10,6 +11,8 @@ if(empty($_SESSION['first_name'])){
 $user_first = $_SESSION['first_name'];
 $user_last = $_SESSION['last_name'];
 $user_role = $_SESSION['role'];
+$user_id = $_SESSION["user_id"];
+include ('rolebased.php');
 
 $query = "SELECT user_id, first_name, mobile_number, last_name, email, password, role FROM users";
 $result = $conn->query($query);
@@ -24,6 +27,7 @@ $result = $conn->query($query);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="bootstrap/css/base.css">
     <link rel="stylesheet" href="bootstrap/css/dashboard.css">
+    <link rel="stylesheet" href="bootstrap/css/admin_dashboard.css">
 </head>
 <body style="background-color: #024059;">
 

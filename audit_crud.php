@@ -1,5 +1,6 @@
 <?php
 include('base.php');
+include('rolebased.php');
 
 $search = isset($_GET['search']) ? $conn->real_escape_string($_GET['search']) : '';
 

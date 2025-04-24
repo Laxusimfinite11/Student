@@ -6,7 +6,11 @@ if(empty($_SESSION['user_id'])){
 }
 
 else if($_SESSION['user_id'] && $_SESSION['otp_enabled'] == 1){
+<<<<<<< Updated upstream
     echo $_SESSION['otp_enabled'];
+=======
+    header("Location: authenticate.php");
+>>>>>>> Stashed changes
     exit();
 }
 

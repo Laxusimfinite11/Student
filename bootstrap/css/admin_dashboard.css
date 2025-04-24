@@ -1,0 +1,30 @@
+.containerTotalUser {
+    background-color: white;
+    height: 20vmax;
+    width: 42vmax;
+    margin-left: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+.containerTotalUser div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+
+.containerTotalUser div p {
+    font-size: 150px;
+}
+
+.total {
+    background-color: white;
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
+}
