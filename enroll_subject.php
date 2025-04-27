@@ -1,7 +1,6 @@
 <?php
 include('conn.php');
 
-
 $subjectID = $_POST['subject_id'] ?? '';  
 $user_id = $_POST['user_id'] ?? '';      
 

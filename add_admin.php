@@ -1,6 +1,7 @@
 <?php
 include('conn.php');
 include 'log_audit.php';
+
 session_start();
 $user_id = $_SESSION['user_id'];
 $admin_name = $_SESSION['first_name'] . " " . $_SESSION['last_name'];
@@ -11,7 +12,6 @@ $lastname = $_POST['adminLastName'] ?? '';
 $email = $_POST['adminEmail'] ?? '';
 $mobile_number = $_POST['adminMobileNumber'] ?? '';
 $password = $_POST['adminPassword'] ?? '';
-
 
 
 $firstname = mysqli_real_escape_string($conn, $firstname);

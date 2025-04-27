@@ -1,0 +1,128 @@
+.dashboardElements {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 40px;
+    margin: 20px;
+}
+
+.containerTotalUser {
+    background-color: white;
+    height: 20vmax;
+    width: 42vmax;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: center;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+.containerTotalUser div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+}
+
+.containerTotalUser div p {
+    font-size: 150px;
+}
+
+.total {
+    background-color: rgb(255, 255, 255);
+    height: 170px;
+    width: 170px;
+    border-radius: 50%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+}
+
+.containerTotalSubject {
+    background-color: white;
+    height: 20vmax;
+    width: 42vmax;
+    display: flex;
+    flex-direction: row;
+    gap: 70px;
+    justify-content: center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    padding: 40px;
+}
+
+.totalCircle {
+    background-color: rgb(255, 255, 255);
+    height: 170px;
+    width: 170px;
+    border-radius: 50%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.totalCircle p {
+    font-size: 80px;
+}
+
+.TotalSubject {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    
+}
+
+.mostSubject {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tableSub {
+    width: 100%;
+    border-collapse: separate; /* change this to 'separate' so borders don't collapse */
+    border-spacing: 0 10px; /* adds space between rows */
+    margin-top: 10px;
+    font-family: Arial, sans-serif;
+    border-radius: 10px; /* Rounded corners for the table */
+    overflow: hidden; /* Prevents inner content from spilling outside rounded corners */
+    box-shadow: 30px 0 20px rgba(0, 0, 0, 0.1); /* soft shadow on each cell */
+}
+
+.tableSub th, .tableSub td {
+    text-align: left;
+    padding: 10px;
+    border-radius: 5px; /* Rounded corners for the table cells */
+}
+
+
+.tableSub tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.tableSub tr:hover {
+    background-color: #e9f5ff;
+}
+
+.containerTopPerformer {
+    background-color: white;
+    height: 20vmax;
+    width: 42vmax;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: center;
+    box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+.containerTeacherPerformance{
+    background-color: white;
+    height: 20vmax;
+    width: 42vmax;
+    display: flex;
+    flex-direction: row;
+    gap: 70px;
+    justify-content: center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    padding: 40px;
+}

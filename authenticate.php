@@ -2,10 +2,24 @@
 include ('conn.php');
 session_start();
 
+$stmt = $conn->prepare("SELECT otp_enabled FROM users WHERE email = ? LIMIT 1");
+$stmt->bind_param("s", $input_email);
+$stmt->execute();
+$stmt->bind_result($otp_enabled);
 
-if(empty($_SESSION['first_name'])){
+
+$_SESSION['otp_enabled'] = $otp_enabled;
+
+if(empty($_SESSION['first_name'])) {
     header("Location: logout.php");
+    exit();
 }
+
+if ($otp_enabled    ) {
+    header("Location: logout.php");
+    exit();
+}
+
 
 if (isset($_SESSION['otp_verified']) && $_SESSION['otp_verified'] === true) {
     header("Location: admin_dashboard.php");
@@ -17,6 +31,7 @@ $user_no = $_SESSION['mobile_number'];
 
 $otp_error = isset($_SESSION['otp_error']) ? $_SESSION['otp_error'] : '';
 unset($_SESSION['otp_error']);
+$stmt->close();
 ?>
 
 <!DOCTYPE html>
