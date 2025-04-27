@@ -17,6 +17,7 @@ include ('rolebased.php');
 $query = "SELECT user_id, first_name, mobile_number, last_name, email, password, role FROM users";
 $result = $conn->query($query);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,6 +29,7 @@ $result = $conn->query($query);
     <link rel="stylesheet" href="bootstrap/css/base.css">
     <link rel="stylesheet" href="bootstrap/css/dashboard.css">
     <link rel="stylesheet" href="bootstrap/css/admin_dashboard.css">
+    
 </head>
 <body style="background-color: #024059;">
 
@@ -47,25 +49,17 @@ $result = $conn->query($query);
                     if ($user_role == 'Admin'){
                         echo '<a href="student_crud.php" class="btn btn-primary me-2">Students</a><a href="admin_crud.php" class="btn btn-primary me-2">Admins</a><a href="subject_crud.php" class="btn btn-primary me-2">Subjects</a> <a href="audit_crud.php" class="btn btn-primary me-2">Activity</a>';
                     }
-
-                    else{
                     
-                        echo '';
-                    }
+
                 ?>
+                <a href="logout.php" class="btn btn-log-out">Log Out</a>
 
                 <a  class="setting" href="settings.php">
                     <i class="bi bi-gear" id="settings-icon"></i>
-                </a>
-
-                
+                </a>     
             </div>
         </div>
     </nav>
-
-    
-
-
     
 </body>
 

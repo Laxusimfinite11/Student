@@ -10,15 +10,12 @@ $stmt->bind_result($otp_enabled);
 
 $_SESSION['otp_enabled'] = $otp_enabled;
 
-
-echo $_SESSION['otp_enabled'];
-
 if(empty($_SESSION['first_name'])) {
     header("Location: logout.php");
     exit();
 }
 
-if (!$otp_enabled) {
+if ($otp_enabled    ) {
     header("Location: logout.php");
     exit();
 }

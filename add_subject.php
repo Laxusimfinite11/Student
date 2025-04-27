@@ -1,6 +1,5 @@
 <?php
 include('conn.php');
-include('rolebased.php');
 
 
 $name = $_POST['name'] ?? '';

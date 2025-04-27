@@ -1,6 +1,5 @@
 <?php
 include ('base.php');
-include('rolebased.php');
 ?>
     <div class="container mt-5">
         <!-- modal ng add admin -->
@@ -217,6 +216,16 @@ $result = $conn->query($query);
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+document.getElementById('addAdminForm').addEventListener('submit', function(event) {
+    const password = document.getElementById('adminPassword').value;
+    if (password.length < 8) {
+        event.preventDefault(); // Stop form from submitting
+        alert('Password must be at least 8 characters long.');
+    }
+});
+</script>
 </body>
 </html>
 
